@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/enfield-dev/"
+title = "Enfield Dev Ltd."
+version = "1.0.0"
+id = "artifacts/enfield-dev"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/enfield-dev/" ]
+localPort = 18477
+
+[services.development]
+run = "pnpm --filter @workspace/enfield-dev run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/enfield-dev", "run", "build" ]
+publicDir = "artifacts/enfield-dev/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18477"
+BASE_PATH = "/enfield-dev/"
